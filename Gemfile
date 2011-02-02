@@ -2,7 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
 gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
-
+gem 'ZenTest'
+gem 'autotest-rails-pure'
 group :development do
   gem 'rspec-rails', '2.3.0'
 end
