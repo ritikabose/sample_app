@@ -13,6 +13,8 @@ require 'digest'
 class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
+  
+has_many :microposts, :dependent => :destroy
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -26,7 +28,10 @@ class User < ActiveRecord::Base
   validates :password, :presence     => true,
                        :confirmation => true,
                        :length       => { :within => 6..40 }
-                       
+   def feed
+     # This is preliminary. See Chapter 12 for the full implementation.
+    Micropost.where("user_id = ?", id)
+   end                    
  before_save :encrypt_password
  # Return true if the user's password matches the submitted password.
   def has_password?(submitted_password)
@@ -62,5 +67,7 @@ class User < ActiveRecord::Base
     def secure_hash(string)
       Digest::SHA2.hexdigest(string)
     end
+    
+     
 end
 
