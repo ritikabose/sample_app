@@ -8,14 +8,14 @@ class UsersController < ApplicationController
    def index
     @title = "All users"
      @users = User.paginate(:page => params[:page])
-  end
+   end
   
   def show
     @user = User.find(params[:id])
      @microposts = @user.microposts.paginate(:page => params[:page])
     @title = @user.name
     
- end
+  end
   
   def new
   	@user = User.new
@@ -32,11 +32,11 @@ class UsersController < ApplicationController
       @title = "Sign up"
       render 'new'
     end
-    end
+  end
      def edit
     @user = User.find(params[:id])
     @title = "Edit user"
-  end
+     end
   
    def update
     
@@ -54,6 +54,20 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
     redirect_to users_path
+   end
+  
+   def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.following.paginate(:page => params[:page])
+    render 'show_follow'
+   end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(:page => params[:page])
+    render 'show_follow'
   end
    
    
@@ -66,7 +80,7 @@ class UsersController < ApplicationController
      def correct_user
       @user = User.find(params[:id])
       redirect_to(root_path) unless current_user?(@user)
-    end
+     end
     
     def admin_user
       redirect_to(root_path) unless current_user.admin?
