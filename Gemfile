@@ -6,9 +6,10 @@ gem 'gravatar_image_tag', '1.0.0.pre2'
 gem 'ZenTest'
 gem 'autotest-rails-pure'
 gem 'will_paginate', '3.0.pre2'
-
+ 
 group :production do
-  gem 'pg' , '0.9.0'
+
+  gem 'rake', '0.8.7'
 end
 group :development do
   gem 'rspec-rails', '2.3.0'
