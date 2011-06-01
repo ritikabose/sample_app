@@ -8,7 +8,6 @@ module ::SampleApp
     include Rake::DSL
   end
 end
-
 module ::RakeFileUtils
   extend Rake::FileUtilsExt
 end
